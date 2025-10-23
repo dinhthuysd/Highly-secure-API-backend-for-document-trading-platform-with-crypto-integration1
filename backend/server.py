@@ -78,6 +78,8 @@ async def get_status_checks():
 # Include admin routers
 api_router.include_router(admin_auth_router)
 api_router.include_router(admin_management_router)
+api_router.include_router(admin_advanced_router)
+api_router.include_router(web3_router)
 
 # Include the router in the main app
 app.include_router(api_router)
