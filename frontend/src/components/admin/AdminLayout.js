@@ -15,7 +15,11 @@ import {
   LogOut,
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  Key,
+  Lock,
+  UserCog,
+  Settings
 } from 'lucide-react';
 
 const AdminLayout = () => {
@@ -33,6 +37,10 @@ const AdminLayout = () => {
     { path: '/admin/withdrawals', icon: ArrowUpCircle, label: 'Withdrawals' },
     { path: '/admin/transactions', icon: Receipt, label: 'Transactions' },
     { path: '/admin/logs', icon: FileCheck, label: 'Audit Logs' },
+    { path: '/admin/api-tokens', icon: Key, label: 'API Tokens', divider: true },
+    { path: '/admin/api-permissions', icon: Lock, label: 'API Permissions' },
+    { path: '/admin/admin-users', icon: UserCog, label: 'Admin Users', superAdminOnly: true },
+    { path: '/admin/settings', icon: Settings, label: 'Settings', superAdminOnly: true },
   ];
 
   const handleLogout = async () => {
