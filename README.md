@@ -1,30 +1,45 @@
-# Trading Platform - Admin Panel System
+# Trading Platform - Admin Panel System với Web3 Integration
 
-Hệ thống quản trị toàn diện cho nền tảng mua bán tài liệu với tích hợp tiền ảo, staking và đầu tư.
+Hệ thống quản trị toàn diện cho nền tảng mua bán tài liệu với tích hợp tiền ảo thật (Web3/MetaMask), quản lý API tokens, và cấu hình hệ thống.
 
 ## 📋 Tổng Quan
 
-Dự án này là một hệ thống admin panel đầy đủ chức năng được xây dựng dựa trên cấu trúc từ [repository gốc](https://github.com/dinhthuysd/trading).
+Dự án này là một hệ thống admin panel đầy đủ chức năng với các tính năng tiên tiến:
 
-### Tính Năng Chính
+### 🎯 Tính Năng Chính
 
-#### 🔐 **Hệ Thống Bảo Mật**
+#### 🔐 **Hệ Thống Bảo Mật Cao Cấp**
 - **JWT Authentication** với Access & Refresh Token
 - **2FA (Two-Factor Authentication)** với TOTP  
 - **Role-based Authorization** (Super Admin, Admin, Moderator)
 - **Password Hashing** với bcrypt
 - **Rate Limiting** (100 requests/minute per IP)
 - **Audit Logging** cho mọi hành động quan trọng
+- **API Token Management** với quyền chi tiết
 
 #### 👨‍💼 **Admin Panel Features**
-- Dashboard tổng quan với thống kê real-time
-- Quản lý người dùng (User Management)
-- Xác minh KYC (KYC Verification)
-- Duyệt tài liệu (Document Approval)
-- Xử lý nạp tiền (Deposit Management)
-- Xử lý rút tiền (Withdrawal Management)
-- Lịch sử giao dịch (Transaction History)
-- Nhật ký hệ thống (Audit Logs)
+- ✅ **Dashboard** - Tổng quan với thống kê real-time
+- ✅ **User Management** - Quản lý người dùng platform
+- ✅ **KYC Verification** - Xác minh danh tính
+- ✅ **Document Approval** - Duyệt tài liệu
+- ✅ **Deposit Management** - Xử lý nạp tiền (crypto & fiat)
+- ✅ **Withdrawal Management** - Xử lý rút tiền (crypto & fiat)
+- ✅ **Transaction History** - Lịch sử giao dịch đầy đủ
+- ✅ **Audit Logs** - Nhật ký hệ thống
+- ✅ **API Token Management** - Quản lý API keys cho users
+- ✅ **API Permissions** - Định nghĩa quyền truy cập API
+- ✅ **Admin Users Management** - CRUD admin accounts (Super Admin only)
+- ✅ **System Settings** - Cấu hình fees, limits, APY rates
+
+#### 🌐 **Web3 & Crypto Integration (Thật)**
+- **MetaMask Integration** - Kết nối ví crypto
+- **Multi-chain Support**:
+  - Ethereum (Mainnet & Sepolia)
+  - Binance Smart Chain (Mainnet & Testnet)
+  - Polygon (Mainnet & Mumbai)
+- **Crypto Deposits** - Nạp tiền qua blockchain
+- **Crypto Withdrawals** - Rút tiền về ví cá nhân
+- **Real-time Balance** - Kiểm tra số dư trực tiếp từ blockchain
 
 ---
 
