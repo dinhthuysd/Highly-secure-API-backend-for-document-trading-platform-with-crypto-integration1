@@ -427,28 +427,49 @@ mongosh mongodb://localhost:27017
 ```
 /app/
 ├── backend/
-│   ├── server.py              # Main FastAPI application
-│   ├── models.py              # Pydantic models
-│   ├── security.py            # JWT, hashing, 2FA utilities
-│   ├── middleware.py          # Authentication middleware
-│   ├── database.py            # MongoDB connection & indexes
+│   ├── server.py                 # Main FastAPI application
+│   ├── models.py                 # Pydantic models (API Token, Permissions, Settings, Web3)
+│   ├── security.py               # JWT, hashing, 2FA utilities
+│   ├── middleware.py             # Authentication middleware
+│   ├── database.py               # MongoDB connection & indexes
 │   ├── routes/
-│   │   ├── admin_auth.py      # Admin authentication routes
-│   │   └── admin_management.py # Admin management routes
-│   ├── .env                   # Environment variables
+│   │   ├── admin_auth.py         # Admin authentication routes
+│   │   ├── admin_management.py   # Admin management routes
+│   │   ├── admin_advanced.py     # API tokens, permissions, settings (NEW)
+│   │   └── web3.py               # Web3 crypto routes (NEW)
+│   ├── .env                      # Environment variables
 │   └── requirements.txt
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── pages/admin/       # Admin pages
-│   │   ├── components/admin/  # Admin components
-│   │   ├── services/          # API services
-│   │   ├── contexts/          # React contexts
-│   │   └── App.js            # Main app with routing
+│   │   ├── pages/admin/
+│   │   │   ├── AdminLogin.js
+│   │   │   ├── AdminDashboard.js
+│   │   │   ├── AdminUsers.js
+│   │   │   ├── AdminKYC.js
+│   │   │   ├── AdminDocuments.js
+│   │   │   ├── AdminDeposits.js
+│   │   │   ├── AdminWithdrawals.js
+│   │   │   ├── AdminTransactions.js
+│   │   │   ├── AdminLogs.js
+│   │   │   ├── AdminAPITokens.js        # NEW
+│   │   │   ├── AdminAPIPermissions.js   # NEW
+│   │   │   ├── AdminUsersManagement.js  # NEW
+│   │   │   └── AdminSettings.js         # NEW
+│   │   ├── components/admin/
+│   │   │   ├── AdminLayout.js
+│   │   │   └── ProtectedAdminRoute.js
+│   │   ├── services/
+│   │   │   ├── api.js
+│   │   │   ├── adminService.js
+│   │   │   └── web3Service.js           # NEW - MetaMask integration
+│   │   ├── contexts/
+│   │   │   └── AdminAuthContext.js
+│   │   └── App.js
 │   ├── .env
 │   └── package.json
 │
-└── README.md                  # This file
+└── README.md                      # This file
 ```
 
 ---
