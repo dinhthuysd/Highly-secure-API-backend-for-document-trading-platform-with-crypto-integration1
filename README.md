@@ -220,17 +220,46 @@ Hệ thống sử dụng MongoDB với các collections sau:
 
 ### Public Pages
 - `/` - Landing page với link đến admin panel
-- `/admin/login` - Trang đăng nhập admin (đẹp mắt với gradient animation)
+
+### Admin Authentication
+- `/admin/login` - Trang đăng nhập admin (Gradient animation, 2FA support)
 
 ### Admin Pages (Protected - Requires Login)
+
+#### Core Management
 - `/admin/dashboard` - Dashboard tổng quan với statistics cards
 - `/admin/users` - Quản lý người dùng với search và pagination
 - `/admin/kyc` - Xác minh KYC
 - `/admin/documents` - Duyệt tài liệu
-- `/admin/deposits` - Xử lý nạp tiền (approve/reject)
-- `/admin/withdrawals` - Xử lý rút tiền (approve/reject)
+- `/admin/deposits` - Xử lý nạp tiền (approve/reject, crypto & fiat)
+- `/admin/withdrawals` - Xử lý rút tiền (approve/reject, crypto & fiat)
 - `/admin/transactions` - Lịch sử giao dịch
 - `/admin/logs` - Nhật ký hệ thống
+
+#### Advanced Features (NEW)
+- `/admin/api-tokens` - 🔑 Quản lý API tokens
+  - Tạo token mới cho user
+  - Xem danh sách tokens
+  - Revoke tokens
+  - Gán permissions
+  
+- `/admin/api-permissions` - 🔐 Quản lý API permissions
+  - Định nghĩa permissions mới
+  - Phân loại theo category
+  - Kích hoạt/vô hiệu hóa
+  
+- `/admin/admin-users` - 👥 Quản lý Admin Users (Super Admin only)
+  - Tạo admin accounts mới
+  - Cập nhật roles
+  - Kích hoạt/vô hiệu hóa
+  - Xóa admin accounts
+  
+- `/admin/settings` - ⚙️ System Settings (Super Admin only)
+  - **Fees Tab**: Transaction, withdrawal fees
+  - **Limits Tab**: Deposit/withdrawal limits, KYC thresholds
+  - **Staking Tab**: APY rates, lock periods
+  - **Investment Tab**: Return rates, periods
+  - **Web3 Tab**: Network configurations
 
 ---
 
