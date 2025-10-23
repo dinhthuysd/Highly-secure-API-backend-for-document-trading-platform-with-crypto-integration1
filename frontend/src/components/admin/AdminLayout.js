@@ -73,23 +73,30 @@ const AdminLayout = () => {
           {/* Navigation */}
           <nav className="flex-1 overflow-y-auto p-4 space-y-1">
             {menuItems.map((item) => {
+              // Hide super admin only items for non-super admins
+              if (item.superAdminOnly && admin?.role !== 'super_admin') {
+                return null;
+              }
+              
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
               
               return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all ${
-                    isActive
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-                  }`}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span className="font-medium">{item.label}</span>
-                  {isActive && <ChevronRight className="w-4 h-4 ml-auto" />}
-                </Link>
+                <React.Fragment key={item.path}>
+                  {item.divider && <div className="h-px bg-slate-800 my-3" />}
+                  <Link
+                    to={item.path}
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all ${
+                      isActive
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
+                        : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    }`}
+                  >
+                    <Icon className="w-5 h-5" />
+                    <span className="font-medium">{item.label}</span>
+                    {isActive && <ChevronRight className="w-4 h-4 ml-auto" />}
+                  </Link>
+                </React.Fragment>
               );
             })}
           </nav>
