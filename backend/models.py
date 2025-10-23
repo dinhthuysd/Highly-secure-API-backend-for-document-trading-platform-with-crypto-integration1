@@ -293,3 +293,158 @@ class DashboardStats(BaseModel):
     total_revenue: float
     active_stakings: int
     active_investments: int
+
+# ============ API TOKEN MODELS ============
+
+class APIToken(BaseModel):
+    """API Token model for user API access"""
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    name: str  # Token name/label
+    token_key: str  # The actual API key (hashed in DB)
+    permissions: List[str] = Field(default_factory=list)  # List of allowed permissions
+    is_active: bool = True
+    expires_at: Optional[datetime] = None
+    last_used_at: Optional[datetime] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class APITokenCreate(BaseModel):
+    """Schema for creating API token"""
+    user_id: str
+    name: str
+    permissions: List[str] = Field(default_factory=list)
+    expires_in_days: Optional[int] = None  # None = no expiration
+
+class APITokenUpdate(BaseModel):
+    """Schema for updating API token"""
+    name: Optional[str] = None
+    permissions: Optional[List[str]] = None
+    is_active: Optional[bool] = None
+
+# ============ API PERMISSION MODELS ============
+
+class APIPermission(BaseModel):
+    """API Permission definition"""
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str  # e.g., "documents:read", "wallet:write"
+    description: str
+    category: str  # e.g., "documents", "wallet", "trading"
+    is_active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class APIPermissionCreate(BaseModel):
+    """Schema for creating API permission"""
+    name: str
+    description: str
+    category: str
+
+class APIPermissionUpdate(BaseModel):
+    """Schema for updating API permission"""
+    description: Optional[str] = None
+    is_active: Optional[bool] = None
+
+# ============ SYSTEM SETTINGS MODELS ============
+
+class SystemSettings(BaseModel):
+    """System configuration settings"""
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default="system_settings")
+    
+    # Fee settings
+    transaction_fee_percentage: float = 2.5  # Default 2.5%
+    withdrawal_fee_fixed: float = 1.0  # Fixed withdrawal fee
+    withdrawal_fee_percentage: float = 1.0  # Percentage withdrawal fee
+    
+    # Limits
+    min_deposit_amount: float = 10.0
+    max_deposit_amount: float = 100000.0
+    min_withdrawal_amount: float = 20.0
+    max_withdrawal_amount: float = 50000.0
+    daily_withdrawal_limit: float = 10000.0
+    
+    # Staking settings
+    staking_basic_apy: float = 5.0  # 5% APY
+    staking_premium_apy: float = 10.0  # 10% APY
+    staking_vip_apy: float = 15.0  # 15% APY
+    min_staking_amount: float = 100.0
+    staking_lock_period_days: int = 30
+    
+    # Investment settings
+    investment_starter_return: float = 20.0  # 20% return
+    investment_growth_return: float = 35.0  # 35% return
+    investment_premium_return: float = 50.0  # 50% return
+    min_investment_amount: float = 500.0
+    investment_period_days: int = 90
+    
+    # KYC settings
+    kyc_required_for_withdrawal: bool = True
+    kyc_required_amount_threshold: float = 1000.0
+    
+    # Web3 settings
+    eth_network: str = "mainnet"  # mainnet, goerli, sepolia
+    bsc_network: str = "mainnet"  # mainnet, testnet
+    polygon_network: str = "mainnet"  # mainnet, mumbai
+    
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_by: Optional[str] = None  # Admin ID who updated
+
+class SystemSettingsUpdate(BaseModel):
+    """Schema for updating system settings"""
+    # Fee settings
+    transaction_fee_percentage: Optional[float] = None
+    withdrawal_fee_fixed: Optional[float] = None
+    withdrawal_fee_percentage: Optional[float] = None
+    
+    # Limits
+    min_deposit_amount: Optional[float] = None
+    max_deposit_amount: Optional[float] = None
+    min_withdrawal_amount: Optional[float] = None
+    max_withdrawal_amount: Optional[float] = None
+    daily_withdrawal_limit: Optional[float] = None
+    
+    # Staking settings
+    staking_basic_apy: Optional[float] = None
+    staking_premium_apy: Optional[float] = None
+    staking_vip_apy: Optional[float] = None
+    min_staking_amount: Optional[float] = None
+    staking_lock_period_days: Optional[int] = None
+    
+    # Investment settings
+    investment_starter_return: Optional[float] = None
+    investment_growth_return: Optional[float] = None
+    investment_premium_return: Optional[float] = None
+    min_investment_amount: Optional[float] = None
+    investment_period_days: Optional[int] = None
+    
+    # KYC settings
+    kyc_required_for_withdrawal: Optional[bool] = None
+    kyc_required_amount_threshold: Optional[float] = None
+    
+    # Web3 settings
+    eth_network: Optional[str] = None
+    bsc_network: Optional[str] = None
+    polygon_network: Optional[str] = None
+
+# ============ WEB3 MODELS ============
+
+class Web3DepositRequest(BaseModel):
+    """Web3 crypto deposit request"""
+    transaction_hash: str
+    amount: float
+    token_symbol: str  # ETH, BNB, MATIC, USDT, etc.
+    network: str  # ethereum, bsc, polygon
+    from_address: str
+
+class Web3WithdrawalRequest(BaseModel):
+    """Web3 crypto withdrawal request"""
+    amount: float
+    token_symbol: str
+    network: str
+    to_address: str
