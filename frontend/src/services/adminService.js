@@ -140,6 +140,108 @@ class AdminService {
     const response = await api.get('/admin/audit-logs', { params });
     return response.data;
   }
+  
+  // ============ API TOKEN MANAGEMENT ============
+  
+  async createAPIToken(tokenData) {
+    const response = await api.post('/admin/api-tokens', tokenData);
+    return response.data;
+  }
+  
+  async getAPITokens(params = {}) {
+    const response = await api.get('/admin/api-tokens', { params });
+    return response.data;
+  }
+  
+  async getAPITokenDetail(tokenId) {
+    const response = await api.get(`/admin/api-tokens/${tokenId}`);
+    return response.data;
+  }
+  
+  async updateAPIToken(tokenId, updateData) {
+    const response = await api.put(`/admin/api-tokens/${tokenId}`, updateData);
+    return response.data;
+  }
+  
+  async deleteAPIToken(tokenId) {
+    const response = await api.delete(`/admin/api-tokens/${tokenId}`);
+    return response.data;
+  }
+  
+  // ============ API PERMISSIONS MANAGEMENT ============
+  
+  async createAPIPermission(permissionData) {
+    const response = await api.post('/admin/api-permissions', permissionData);
+    return response.data;
+  }
+  
+  async getAPIPermissions(params = {}) {
+    const response = await api.get('/admin/api-permissions', { params });
+    return response.data;
+  }
+  
+  async updateAPIPermission(permissionId, updateData) {
+    const response = await api.put(`/admin/api-permissions/${permissionId}`, updateData);
+    return response.data;
+  }
+  
+  async deleteAPIPermission(permissionId) {
+    const response = await api.delete(`/admin/api-permissions/${permissionId}`);
+    return response.data;
+  }
+  
+  // ============ ADMIN USERS MANAGEMENT ============
+  
+  async getAdminUsers(params = {}) {
+    const response = await api.get('/admin/admin-users', { params });
+    return response.data;
+  }
+  
+  async getAdminUserDetail(adminId) {
+    const response = await api.get(`/admin/admin-users/${adminId}`);
+    return response.data;
+  }
+  
+  async createAdminUser(adminData) {
+    const response = await api.post('/admin/auth/register', adminData);
+    return response.data;
+  }
+  
+  async updateAdminUserStatus(adminId, isActive) {
+    const response = await api.put(`/admin/admin-users/${adminId}/status`, null, {
+      params: { is_active: isActive },
+    });
+    return response.data;
+  }
+  
+  async updateAdminUserRole(adminId, newRole) {
+    const response = await api.put(`/admin/admin-users/${adminId}/role`, null, {
+      params: { new_role: newRole },
+    });
+    return response.data;
+  }
+  
+  async deleteAdminUser(adminId) {
+    const response = await api.delete(`/admin/admin-users/${adminId}`);
+    return response.data;
+  }
+  
+  // ============ SYSTEM SETTINGS ============
+  
+  async getSettings() {
+    const response = await api.get('/admin/settings');
+    return response.data;
+  }
+  
+  async updateSettings(settingsData) {
+    const response = await api.put('/admin/settings', settingsData);
+    return response.data;
+  }
+  
+  async resetSettings() {
+    const response = await api.post('/admin/settings/reset');
+    return response.data;
+  }
 }
 
 export default new AdminService();
