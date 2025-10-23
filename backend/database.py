@@ -69,6 +69,20 @@ async def create_indexes():
     await db.audit_logs.create_index("action")
     await db.audit_logs.create_index("timestamp")
     
+    # API tokens indexes
+    await db.api_tokens.create_index("user_id")
+    await db.api_tokens.create_index("token_key", unique=True)
+    await db.api_tokens.create_index("is_active")
+    await db.api_tokens.create_index("expires_at")
+    
+    # API permissions indexes
+    await db.api_permissions.create_index("name", unique=True)
+    await db.api_permissions.create_index("category")
+    await db.api_permissions.create_index("is_active")
+    
+    # System settings index
+    await db.system_settings.create_index("id", unique=True)
+    
     print("Database indexes created successfully")
 
 async def seed_default_admin():
