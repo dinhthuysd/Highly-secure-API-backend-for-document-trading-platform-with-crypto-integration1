@@ -6,11 +6,21 @@ import { AdminAuthProvider } from "./contexts/AdminAuthContext";
 import { Toaster } from "./components/ui/toaster";
 
 // Admin imports
-import { AdminLogin, AdminDashboard, AdminUsers, AdminDeposits, AdminWithdrawals } from "./pages/admin";
-import AdminKYC from "./pages/admin/AdminKYC";
-import AdminDocuments from "./pages/admin/AdminDocuments";
-import AdminTransactions from "./pages/admin/AdminTransactions";
-import AdminLogs from "./pages/admin/AdminLogs";
+import { 
+  AdminLogin, 
+  AdminDashboard, 
+  AdminUsers, 
+  AdminDeposits, 
+  AdminWithdrawals,
+  AdminKYC,
+  AdminDocuments,
+  AdminTransactions,
+  AdminLogs,
+  AdminAPITokens,
+  AdminAPIPermissions,
+  AdminUsersManagement,
+  AdminSettings
+} from "./pages/admin";
 import AdminLayout from "./components/admin/AdminLayout";
 import ProtectedAdminRoute from "./components/admin/ProtectedAdminRoute";
 
