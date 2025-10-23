@@ -265,25 +265,32 @@ Hệ thống sử dụng MongoDB với các collections sau:
 
 ## 🔒 Role-Based Permissions
 
-### Super Admin
-- ✅ Quản lý admin khác
+### Super Admin 👑
 - ✅ Toàn quyền truy cập mọi chức năng
+- ✅ Quản lý admin users (CRUD)
+- ✅ Quản lý API tokens & permissions
+- ✅ Cấu hình system settings
 - ✅ Xem và quản lý audit logs
-- ✅ Cài đặt hệ thống
+- ✅ Quản lý users, KYC, documents
+- ✅ Xử lý deposits & withdrawals
 
-### Admin
-- ✅ Quản lý người dùng
+### Admin 💼
+- ✅ Quản lý người dùng platform
 - ✅ Xử lý KYC, deposits, withdrawals
 - ✅ Duyệt tài liệu
-- ✅ Xem thống kê
-- ❌ Không thể quản lý admin khác
+- ✅ Xem thống kê & transactions
+- ✅ Quản lý API tokens
+- ✅ Xem API permissions
+- ❌ Không thể quản lý admin users
+- ❌ Không thể chỉnh sửa system settings
 
-### Moderator
+### Moderator 📋
 - ✅ Duyệt tài liệu
 - ✅ Xác minh KYC
 - ✅ Xem thống kê cơ bản
 - ❌ Không thể xử lý deposits/withdrawals
 - ❌ Không thể quản lý users
+- ❌ Không thể truy cập advanced features
 
 ---
 
