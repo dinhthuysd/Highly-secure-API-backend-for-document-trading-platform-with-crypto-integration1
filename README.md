@@ -312,6 +312,83 @@ curl http://localhost:8001/api/admin/dashboard \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
+### Create API Token
+```bash
+curl -X POST http://localhost:8001/api/admin/api-tokens \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": "user_id_here",
+    "name": "Production API Key",
+    "permissions": ["documents:read", "wallet:read"],
+    "expires_in_days": 30
+  }'
+```
+
+### Get System Settings
+```bash
+curl http://localhost:8001/api/admin/settings \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+---
+
+## 🌐 Web3 Integration Guide
+
+### MetaMask Setup
+
+1. **Cài đặt MetaMask Extension**
+   - Chrome: https://chrome.google.com/webstore/detail/metamask
+   - Firefox: https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/
+
+2. **Kết nối với Deposit/Withdrawal Pages**
+   ```javascript
+   // Frontend tự động detect MetaMask
+   // Click "Connect Wallet" button trên trang
+   ```
+
+3. **Supported Networks**
+   - **Ethereum Mainnet** (Chain ID: 1)
+   - **Ethereum Sepolia Testnet** (Chain ID: 11155111)
+   - **BSC Mainnet** (Chain ID: 56)
+   - **BSC Testnet** (Chain ID: 97)
+   - **Polygon Mainnet** (Chain ID: 137)
+   - **Polygon Mumbai Testnet** (Chain ID: 80001)
+
+### Crypto Deposit Flow
+
+1. User kết nối MetaMask
+2. Chọn network (Ethereum, BSC, hoặc Polygon)
+3. Gửi crypto đến địa chỉ platform wallet
+4. Lấy transaction hash từ blockchain explorer
+5. Submit transaction hash qua form
+6. Admin xác nhận và approve deposit
+
+### Crypto Withdrawal Flow
+
+1. User nhập số tiền và địa chỉ ví
+2. System check balance và fees
+3. Funds được lock trong pending withdrawal
+4. Admin review và approve
+5. Platform gửi crypto đến địa chỉ user
+6. Transaction hash được lưu vào database
+
+### Platform Wallet Addresses
+
+**⚠️ Important:** Địa chỉ ví platform phải được cấu hình trong System Settings
+
+```
+Ethereum: 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0
+BSC: 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0
+Polygon: 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0
+```
+
+### Supported Tokens
+
+- **Ethereum**: ETH, USDT, USDC, DAI
+- **BSC**: BNB, USDT, USDC, BUSD
+- **Polygon**: MATIC, USDT, USDC, DAI
+
 ---
 
 ## 🛠️ Troubleshooting
