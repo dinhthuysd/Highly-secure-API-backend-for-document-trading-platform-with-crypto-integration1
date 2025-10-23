@@ -13,6 +13,8 @@ from datetime import datetime, timezone
 # Import admin routes
 from routes.admin_auth import router as admin_auth_router
 from routes.admin_management import router as admin_management_router
+from routes.admin_advanced import router as admin_advanced_router
+from routes.web3 import router as web3_router
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
