@@ -117,6 +117,115 @@ async def seed_default_admin():
         print("   ⚠️  PLEASE CHANGE PASSWORD AFTER FIRST LOGIN!")
     else:
         print("Admin user already exists")
+    
+    # Seed default API permissions
+    await seed_api_permissions()
+
+async def seed_api_permissions():
+    """Seed default API permissions"""
+    from datetime import datetime, timezone
+    
+    default_permissions = [
+        {
+            "id": "perm_documents_read",
+            "name": "documents:read",
+            "description": "Read access to documents",
+            "category": "documents",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_documents_write",
+            "name": "documents:write",
+            "description": "Create and upload documents",
+            "category": "documents",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_wallet_read",
+            "name": "wallet:read",
+            "description": "Read wallet balance and transactions",
+            "category": "wallet",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_wallet_withdraw",
+            "name": "wallet:withdraw",
+            "description": "Request withdrawals from wallet",
+            "category": "wallet",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_trading_read",
+            "name": "trading:read",
+            "description": "View trading data and market prices",
+            "category": "trading",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_trading_execute",
+            "name": "trading:execute",
+            "description": "Execute trades and place orders",
+            "category": "trading",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_staking_read",
+            "name": "staking:read",
+            "description": "View staking positions and rewards",
+            "category": "staking",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_staking_manage",
+            "name": "staking:manage",
+            "description": "Stake and unstake tokens",
+            "category": "staking",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_investment_read",
+            "name": "investment:read",
+            "description": "View investment packages and positions",
+            "category": "investment",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": "perm_investment_invest",
+            "name": "investment:invest",
+            "description": "Create investment positions",
+            "category": "investment",
+            "is_active": True,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        }
+    ]
+    
+    # Insert permissions if they don't exist
+    for perm in default_permissions:
+        existing = await db.api_permissions.find_one({"name": perm['name']})
+        if not existing:
+            await db.api_permissions.insert_one(perm)
+    
+    perm_count = await db.api_permissions.count_documents({})
+    print(f"✅ API Permissions seeded: {perm_count} permissions available")
 
 async def get_db():
     """Dependency to get database instance"""
