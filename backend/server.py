@@ -10,6 +10,9 @@ from typing import List
 import uuid
 from datetime import datetime, timezone
 
+# Import admin routes
+from routes.admin_auth import router as admin_auth_router
+from routes.admin_management import router as admin_management_router
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -20,7 +23,11 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(
+    title="Trading Platform Admin API",
+    description="Admin panel API for trading platform",
+    version="1.0.0"
+)
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
@@ -66,6 +73,10 @@ async def get_status_checks():
     
     return status_checks
 
+# Include admin routers
+api_router.include_router(admin_auth_router)
+api_router.include_router(admin_management_router)
+
 # Include the router in the main app
 app.include_router(api_router)
 
@@ -83,6 +94,14 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database and create indexes"""
+    from database import create_indexes, seed_default_admin
+    await create_indexes()
+    await seed_default_admin()
+    logger.info("✅ Database initialized successfully")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
