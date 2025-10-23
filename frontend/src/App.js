@@ -87,6 +87,10 @@ function App() {
               <Route path="withdrawals" element={<AdminWithdrawals />} />
               <Route path="transactions" element={<AdminTransactions />} />
               <Route path="logs" element={<AdminLogs />} />
+              <Route path="api-tokens" element={<AdminAPITokens />} />
+              <Route path="api-permissions" element={<AdminAPIPermissions />} />
+              <Route path="admin-users" element={<AdminUsersManagement />} />
+              <Route path="settings" element={<AdminSettings />} />
             </Route>
             
             {/* Catch all */}
