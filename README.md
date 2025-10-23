@@ -110,17 +110,23 @@ sudo supervisorctl status
 
 Hệ thống sử dụng MongoDB với các collections sau:
 
+### Core Collections
 1. **admin_users** - Quản lý admin accounts
 2. **users** - Người dùng platform
 3. **wallets** - Ví coin nội bộ
 4. **documents** - Tài liệu được upload
-5. **deposit_requests** - Yêu cầu nạp tiền
-6. **withdrawal_requests** - Yêu cầu rút tiền
+5. **deposit_requests** - Yêu cầu nạp tiền (bao gồm crypto)
+6. **withdrawal_requests** - Yêu cầu rút tiền (bao gồm crypto)
 7. **transactions** - Lịch sử giao dịch
 8. **kyc_submissions** - Hồ sơ KYC
 9. **staking_positions** - Vị thế staking
 10. **investment_positions** - Gói đầu tư
 11. **audit_logs** - Nhật ký hệ thống
+
+### New Collections (Added)
+12. **api_tokens** - API access tokens cho users
+13. **api_permissions** - Định nghĩa quyền API
+14. **system_settings** - Cấu hình hệ thống
 
 ---
 
