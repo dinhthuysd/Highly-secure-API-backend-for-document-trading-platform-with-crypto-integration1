@@ -137,10 +137,13 @@ Hệ thống sử dụng MongoDB với các collections sau:
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/admin/auth/login` | Đăng nhập admin |
+| POST | `/admin/auth/register` | Tạo admin mới (Super Admin only) |
 | GET | `/admin/auth/profile` | Lấy thông tin profile |
 | PUT | `/admin/auth/profile` | Cập nhật profile |
 | POST | `/admin/auth/change-password` | Đổi mật khẩu |
 | POST | `/admin/auth/2fa/setup` | Thiết lập 2FA |
+| POST | `/admin/auth/2fa/verify` | Xác nhận 2FA |
+| POST | `/admin/auth/2fa/disable` | Tắt 2FA |
 | POST | `/admin/auth/logout` | Đăng xuất |
 
 ### Admin Management (`/api/admin`)
@@ -161,6 +164,55 @@ Hệ thống sử dụng MongoDB với các collections sau:
 | PUT | `/admin/withdrawals/{id}/process` | Xử lý rút tiền |
 | GET | `/admin/transactions` | Lịch sử giao dịch |
 | GET | `/admin/audit-logs` | Nhật ký hệ thống |
+
+### API Token Management (`/api/admin/api-tokens`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/admin/api-tokens` | Tạo API token mới |
+| GET | `/admin/api-tokens` | Danh sách API tokens |
+| GET | `/admin/api-tokens/{id}` | Chi tiết token |
+| PUT | `/admin/api-tokens/{id}` | Cập nhật token |
+| DELETE | `/admin/api-tokens/{id}` | Xóa (revoke) token |
+
+### API Permissions (`/api/admin/api-permissions`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/admin/api-permissions` | Tạo permission mới |
+| GET | `/admin/api-permissions` | Danh sách permissions |
+| PUT | `/admin/api-permissions/{id}` | Cập nhật permission |
+| DELETE | `/admin/api-permissions/{id}` | Xóa permission |
+
+### Admin Users Management (`/api/admin/admin-users`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/admin/admin-users` | Danh sách admin users |
+| GET | `/admin/admin-users/{id}` | Chi tiết admin user |
+| PUT | `/admin/admin-users/{id}/status` | Cập nhật trạng thái |
+| PUT | `/admin/admin-users/{id}/role` | Cập nhật role |
+| DELETE | `/admin/admin-users/{id}` | Xóa admin user |
+
+### System Settings (`/api/admin/settings`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/admin/settings` | Lấy cấu hình hệ thống |
+| PUT | `/admin/settings` | Cập nhật cấu hình |
+| POST | `/admin/settings/reset` | Reset về mặc định |
+
+### Web3 & Crypto (`/api/web3`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/web3/networks` | Danh sách blockchain networks |
+| GET | `/web3/platform-wallets` | Địa chỉ ví nền tảng |
+| GET | `/web3/wallet` | Ví của user |
+| POST | `/web3/deposit` | Gửi yêu cầu deposit crypto |
+| POST | `/web3/withdrawal` | Gửi yêu cầu withdrawal crypto |
+| GET | `/web3/deposit-history` | Lịch sử deposit |
+| GET | `/web3/withdrawal-history` | Lịch sử withdrawal |
 
 ---
 
